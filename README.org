@@ -1,0 +1,114 @@
+#+title: Røversprogsoversætter udviklet i =Pyside6= vha qtdesigner
+#+subtitle: Programmering
+#+author: Vibenshus Gymnasium
+
+* Introduktion
+
+I denne opgave skal I udvikle en grafisk brugerflade til en *røversprogsoversætter*. Den grafiske brugerflade vil blive udviklet ved hjælp af ~QtDesigner~, mens logikken vil blive skrevet i ~python 3~. Vi tager udgangspunkt i /google translate/, som ser nogenlunde således ud:
+
+[[./img/google_translate.png]]
+
+* Opsætningskrav
+Følgende skal være installeret og aktiveret.
+
+- ~Python 3~
+- ~PyCharm~ eller andet IDE (eller teksteditor)
+- ~pyside6~ installeret og aktiveret i et virtuelt miljø.
+- ~QtDesigner~ (installeres normalt automatisk, når man installere pyside6 vha ~pip~)
+
+  
+I de følgende afsnit får I skriftlig forklaring på, hvad I skal gøre.
+
+* Klargøring af projekt (i ~pycharm~)
+
+- Klon denne opgave fra github classroom. (Det har I nok allerede gjort, når I læser dette.)
+
+- Brug jeres nye repository som projekt. Sørg for at have installeret ~PySide6~ enten i et virtuelt miljø under jeres projekt eller mere centralt. I ved selv, hvor I kan installere ~PySide6~ i ~pycharm~. Det er noget med =settings= og =intepreter=.
+
+- I skal skrive jeres ~python~-program i filen =roeversprogsoversaetter.py=, som I kan finde separat her i git-repo'et eller I kan se koden nedenfor.
+#+begin_src python :exports both :results output :eval never-export :comments link :tangle roeversprogsoversaetter.py
+import sys
+
+from PySide6 import QtWidgets
+
+def oversaet_fra_alm_sprog_til_roeversprog(inputtekst)
+    # Denne funktion skal kunne modtage en tekststreng (inputtekst) og skal
+    # returnere en ny tekststreng, hvor inputtet er oversat til røversprog.
+    roeversprogsoutput = "totesostot"
+    return roeversprogsoutput
+
+
+
+roeversprogsoversaetter = HovedVindue()
+roeversprogsoversaetter.show()
+
+andengradsligningsloeser.exec()
+
+#+end_src
+
+* Design af den grafiske brugerflade i ~Designer~
+- Forlad ~pycharm~ (eller en anden editor) for et øjeblik og åbn programmet ~PySide6-designer~. Vi har øvet os i at få åbnet programmet, så hjælp hinanden med det, hvis I har glemt det siden sidst.
+- ~Designer~ ser nogenlunde således ud, når I åbner det:
+
+  [[./img/designer_foerste_vindue.png]]
+
+- Vælg =Main Window=. Nu skal I gerne have en brugerflade, som ser nogenlunde således ud:
+
+  [[./img/designer_main_window.png]]
+
+- Gem jeres (tomme) design i en ~.ui~-fil. Det gør I gennem menuen ~File->Save As~.
+
+  *Som udgangspunkt skal I sørge for at gemme filen i samme mappe som jeres pythonfil. Giv filen et passende navn. Jeg ville gå med navnet =roeversprogsoversaetter_gui.ui=.
+
+- Nu burde I være klar til at designe jeres brugerflade.
+
+- Inden i går i gang med at opbygge jeres grafiske brugerflade, er det en god idé at udarbejde et /mockup/ på et stykke papir ved siden af. Jeg har givet et bud til et mockup på følgende figur.
+
+  [[./img/mocup.png]]
+
+- Oven på dette mockup kan I nu skrive, hvilke ~widgets~ de forskellige dele skal bestå af, og hvordan layoutet skal styres. I kan se mit forslag nedenfor.
+
+  [[./img/mockup_widgets.png]]
+
+
+- Gå tilbage til ~Designer~ og hav jeres mockup liggende ved siden af. Her er lidt inspiration til, hvordan brugerfladen kan opbygges:
+
+  - Træk vinduet ud til den ønskede standardstørrelse.
+  - Indsæt et ~Grid Layout~ et sted på vinduet.
+  - Højreklik et andet sted på vinduet end inden i de indsatte grid layout, og vælg ~Lay out -> Lay out in a Grid~. Det indsatte grid layout skal nu gerne fylde hele vinduet.
+  - Indsæt ~Label~​s hvor der skal være enlinjes tekster, som ikke kan editeres, ved at trække et label én ad gangen fra tabellen i venstre side ind i grid layoutet i vinduet.
+  - Indsæt to knapper, en til at skifte oversættelsesretning og en til selve oversættelsen. En knap hedder ~Push Button~.
+  - Intsæt to tekstfelter, kaldet ~Plain Text Edit~. Forskellen på ~Plain Text Edit~ og ~Text Edit~ er, at sidstnævnte kan formateres med forskellige skrifttyper, størrelser osv.
+  - Sørg for at det ene tekstfelt *ikke* er redigérbart. Dette gøres ved markerer feltet i vinduet og sætte flueben ved ~readOnly~ i ~Property~ nede i højre hjørne.
+  - Sørg for at give hvert element et passende navn. Dette gøres også under ~Property~-menuen nederst til højre, under ~objectName~. Man kan f.eks. kalde sit inputfelt: ~input_plainTextEdit~.
+  - Angiv den ønskede tekst på labels og knapper.
+  - Hvis I vil have et preview af, hvordan vinduet vil se ud, kan I trykke ~alt+shift+r~.
+  - Mit bud på en brugerflade ser således ud:
+
+    [[./img/faerdigt_design.png]]
+
+  - Sørg for at gemme jeres designfil.
+
+* Programmering af brugeflade i ~pycharm~
+Nu skal I vende tilbage til ~pycharm~ (eller anden editor). Der findes 2 forskellige måder at få sat jeres brugerflade op på i python. De to måder er /direkte indlæsning af jeres designfil (.ui)/ eller /konvertering af designfil til pythonfil/. Der er fordele op ulemper ved begge metoder. Forskellene vil blive beskrevet i de følgende afsnit.
+
+** TODO Direkte indlæsning af designfil
+
+** TODO Konvertering af ui-fil til pythonfil
+
+** TODO Opsætning af knapper vha signals and slots
+
+** TODO Udvikling af logik
+
+Når der udvikles logik til programmer, som ikke direkte har noget at gøre med den grafiske brugegrænseflade, er det en rigtig god idé at skrive koden i en pythonfil for sig selv. På denne måde kan logikken importeres i mange forskellige brugerflader uafhængigt af hinanden. Som det kan ses i skabelonen kan man vælge at kalde filen for ~logik.py~ og lægge den i samme mappe som hovedprogrammet.
+
+*Reglerne for røversprog er ganske simple*. Der er faktisk kun tre.
+
+- Hver konsonant bliver erstattet af to gange sig selv med et o igemmem. "S" bliver altså til "sos".
+- Hver vokal er bare sig selv.
+- Når røversprog skal udtales, skal man stave sig gennem det, hvor "S" læses som "sos" og "a" som "a".
+    "Røversprog" læses altså højt som: Ror-ø-vov-e-ror-sos-pop-ror-o-gog.
+
+Begynd med at udvikle en funktion, som tager en tekststreng som input og returnere en ny tekststring ud fra de førnævnte regler.
+
+Efterfølgende skal I udvikle en funktion, som kan oversætte fra røversprog tilbage til almindeligt sprog. Hvis der er konstruktionsfejl i røversproget, må funktionen meget gerne gøre opmærksom på dette.
