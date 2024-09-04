@@ -171,7 +171,7 @@ program.exec()
 I stedet for at loade .ui-filen direkte er det ofte bedre i udviklingsprocessen at generere en /rigtig/ pythonfil ud fra .ui-filen. Dette kan heldigvis gøres vha kommandoen ~pyside6-uic~. Denne kommando har man adgang til, når man har aktiveret et virtuelt miljø, som indeholder ~PySide6~. For jer, som anvender ~pycharm~ kan det nemt gøres på følgende måde:
 
 1. Tryk på fanen =Terminal= i den nederste bjælke.
-2. I terminalen skriver I nu f.eks. ~pyside6-uic roeversprogsoversaetter.ui > roeversprogsoversaetter_gui.py~
+2. I terminalen skriver I nu f.eks. ~pyside6-uic roeversprogsoversaetter.ui -o roeversprogsoversaetter_gui.py~
 3. Hver gang I laver ændringer i den grafiske brugerflade gennem ~Designer~, skal I huske at køre ovenstående kommando.
 
 #+begin_src python :exports both :results none :eval never-export :comments link :tangle roeversprogsoversaetter_konvertering_med_uic.py
